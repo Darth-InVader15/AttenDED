@@ -6,7 +6,7 @@ const SemesterList = () => {
   const [semesterData, setSemesterData] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/v1/${username}/semester/${number}/getAll`)
+    fetch(`https://attended.onrender.com/v1/${username}/semester/${number}/getAll`)
       .then((response) => response.json())
       .then((data) => setSemesterData(data))
       .catch((error) => console.log(error));
@@ -34,7 +34,7 @@ const SemesterItemDetails = () => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:3000/v1/${username}/semester/${number}/${semesterItemName}`
+      `https://attended.onrender.com/v1/${username}/semester/${number}/${semesterItemName}`
     )
       .then((response) => response.json())
       .then((data) => setItemData(data))
@@ -47,7 +47,7 @@ const SemesterItemDetails = () => {
 
   const handleAbsentmm = async () => {
     fetch(
-      `http://localhost:3000/v1/${username}/semester/${number}/${semesterItemName}/absentmm`,
+      `https://attended.onrender.com/v1/${username}/semester/${number}/${semesterItemName}/absentmm`,
       {
         method: "PUT",
       }
@@ -57,7 +57,7 @@ const SemesterItemDetails = () => {
   };
   const handleAbsentpp = async () => {
     fetch(
-      `http://localhost:3000/v1/${username}/semester/${number}/${semesterItemName}/absentpp`,
+      `https://attended.onrender.com/v1/${username}/semester/${number}/${semesterItemName}/absentpp`,
       {
         method: "PUT",
       }
@@ -68,7 +68,7 @@ const SemesterItemDetails = () => {
 
   const handlePresentmm = async () => {
     fetch(
-      `http://localhost:3000/v1/${username}/semester/${number}/${semesterItemName}/presentmm`,
+      `https://attended.onrender.com/v1/${username}/semester/${number}/${semesterItemName}/presentmm`,
       {
         method: "PUT",
       }
@@ -78,7 +78,7 @@ const SemesterItemDetails = () => {
   };
   const handlePresentpp = async () => {
     fetch(
-      `http://localhost:3000/v1/${username}/semester/${number}/${semesterItemName}/presentpp`,
+      `https://attended.onrender.com/v1/${username}/semester/${number}/${semesterItemName}/presentpp`,
       {
         method: "PUT",
       }
@@ -138,7 +138,7 @@ const NumberList = ({ username }) => {
   const [numbers, setNumbers] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/v1/${username}/allSemesters`)
+    fetch(`https://attended.onrender.com/v1/${username}/allSemesters`)
       .then((response) => response.json())
       .then((data) => setNumbers(data))
       .catch((error) => console.log(error));
@@ -216,7 +216,7 @@ const NumberList = ({ username }) => {
     // Reset the form or perform any other necessary actions
 
     // Make a request to the backend
-    fetch(`http://localhost:3000/v1/${username}/addItem`, {
+    fetch(`https://attended.onrender.com/v1/${username}/addItem`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

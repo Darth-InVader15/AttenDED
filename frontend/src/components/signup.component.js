@@ -13,7 +13,7 @@ export default class SignUp extends Component {
 
     // Make a POST request to the backend API
     axios
-      .post('http://localhost:3000/v1/auth/signup', { email, password, instituteName, username })
+      .post('https://attended.onrender.com/v1/auth/signup', { email, password, instituteName, username })
       .then((response) => {
         // Handle the response from the backend
         if (response.status === 200) {

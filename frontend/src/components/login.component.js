@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import endpoint from '../config'
 
 class Login extends Component {
   handleFormSubmit = (event) => {
@@ -11,7 +12,7 @@ class Login extends Component {
 
     // Make a POST request to the backend API
     axios
-      .post('http://localhost:3000/v1/auth/signin', { email, password })
+      .post('https://attended.onrender.com/v1/auth/signin', { email, password })
       .then((response) => {
         // Handle the response from the backend
         if (response.status === 200) {

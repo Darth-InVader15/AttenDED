@@ -1,0 +1,1 @@
+exports.endpoint = 'https://attended.onrender.com'
