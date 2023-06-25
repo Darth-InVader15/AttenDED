@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  background: #1c8ef9 !important;
+  background: #232725 !important;
   min-height: 100vh;
   display: flex;
   font-weight: 400;
@@ -55,7 +55,7 @@ html,
 }
 
 .auth-wrapper .form-control:focus {
-  border-color: #167bff;
+  border-color: #155ebd;
   box-shadow: none;
 }
 

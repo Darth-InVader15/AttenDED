@@ -59,9 +59,10 @@ const authController = {
     const { email, password } = req.body;
     // Implement your sign-in logic using Firebase Authentication
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then(async () => {
         // Sign-in successful
-        res.send("Sign-in successful");
+        const user = await UserInfo.findOne({email: email})
+        res.status(200).json(user).send();
       })
       .catch((error) => {
         // Handle sign-in error

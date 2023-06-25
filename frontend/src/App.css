@@ -14,7 +14,7 @@
   }
   
   .App-header {
-    background-color: #282c34;
+    background-color: #0b162b;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -35,5 +35,42 @@
     to {
       transform: rotate(360deg);
     }
+  }
+  
+  button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  button:hover {
+    background-color: #eee;
+  }
+  
+  button:active {
+    background-color: #ddd;
+    border-color: #bbb;
+  }
+  
+  .card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    margin: 16px;
+    padding: 16px;
+  }
+  
+  .card-header {
+    padding: 16px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .card-body {
+    padding: 16px;
   }
   

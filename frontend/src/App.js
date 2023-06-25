@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Login from "./components/login.component";
 import SignUp from "./components/signup.component";
-import NumberList from './components/login.component';
+import { NumberList, SemesterList, SemesterItemDetails } from './components/semesters.component';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -13,7 +13,6 @@ function App() {
   const handleLogin = (user) => {
     setLoggedIn(true);
     setUsername(user.username);
-    console.log("CALLLLED");
   };
 
   const handleLogout = () => {
@@ -57,8 +56,29 @@ function App() {
         <div className="auth-wrapper">
           <div className="auth-inner">
             <Routes>
-              <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
+              <Route
+                path="/sign-in"
+                element={
+                  loggedIn ? (
+                    <NumberList username={username} />
+                  ) : (
+                    <Login onLogin={handleLogin} />
+                  )
+                }
+              />
               <Route path="/sign-up" element={<SignUp />} />
+              <Route
+                path="/v1/:username/semester/:number"
+                element={<SemesterList />}
+              />
+              <Route
+                path="/v1/:username/semester"
+                element={<SemesterList username={username} />}
+              />
+              <Route
+                path="/v1/:username/semester/:number/:semesterItemName"
+                element={<SemesterItemDetails />}
+              />
             </Routes>
           </div>
         </div>
