@@ -1,5 +1,5 @@
-import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+const { initializeApp } = require("firebase/app");
+const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } = require("firebase/auth");
 
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,
@@ -46,4 +46,4 @@ const authController = {
   }
 };
 
-export default authController;
+module.exports = authController;
