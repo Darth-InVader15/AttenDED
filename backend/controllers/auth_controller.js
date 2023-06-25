@@ -16,6 +16,7 @@ initializeApp(firebaseConfig);
 
 const auth = getAuth();
 
+
 const authController = {
   signup: (req, res) => {
     const { email, password } = req.body;
