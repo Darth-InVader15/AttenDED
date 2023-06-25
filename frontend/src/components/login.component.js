@@ -1,9 +1,33 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import axios from 'axios';
 
-export default class Login extends Component {
+class Login extends Component {
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    // Get the form values
+    const email = event.target.elements.email.value;
+    const password = event.target.elements.password.value;
+
+    // Make a POST request to the backend API
+    axios
+      .post('http://localhost:3000/v1/auth/signin', { email, password })
+      .then((response) => {
+        // Handle the response from the backend
+        if (response.status === 200) {
+          console.log(response);
+          const username = response.data.username;
+          this.props.onLogin({ username }); // Call the onLogin function from props with the username
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleFormSubmit}>
         <h3>Sign In</h3>
 
         <div className="mb-3">
@@ -12,6 +36,7 @@ export default class Login extends Component {
             type="email"
             className="form-control"
             placeholder="Enter email"
+            name="email"
           />
         </div>
 
@@ -21,6 +46,7 @@ export default class Login extends Component {
             type="password"
             className="form-control"
             placeholder="Enter password"
+            name="password"
           />
         </div>
 
@@ -46,6 +72,8 @@ export default class Login extends Component {
           Forgot <a href="#">password?</a>
         </p>
       </form>
-    )
+    );
   }
 }
+
+export default Login;
