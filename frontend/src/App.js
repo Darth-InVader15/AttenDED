@@ -66,7 +66,13 @@ function App() {
                   )
                 }
               />
-              <Route path="/sign-up" element={<SignUp />} />
+              <Route path="/sign-up" element={
+                  loggedIn ? (
+                    <NumberList username={username} />
+                  ) : (
+                    <SignUp onLogin={handleLogin} />
+                  )
+                }/>
               <Route
                 path="/v1/:username/semester/:number"
                 element={<SemesterList />}

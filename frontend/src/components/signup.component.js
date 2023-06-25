@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class SignUp extends Component {
   handleFormSubmit = (event) => {
@@ -28,7 +29,7 @@ export default class SignUp extends Component {
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleFormSubmit}> {/* Add onSubmit event handler to the form */}
         <h3>Sign Up</h3>
 
         <div className="mb-3">

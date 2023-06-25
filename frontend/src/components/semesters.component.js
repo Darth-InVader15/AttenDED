@@ -146,31 +146,55 @@ const NumberList = ({ username }) => {
 
   const onClick = () => {
     const formHTML = `
-      <div>
-        <form id="subjectForm">
-          <div>
-            <label htmlFor="name">Name:</label>
-            <input type="text" id="name" name="name" required />
-          </div>
-          <div>
-            <label htmlFor="semester">Semester:</label>
-            <input type="text" id="semester" name="semester" required />
-          </div>
-          <div>
-            <label htmlFor="daysPresent"> Days Attended: </label>
-            <input type="number" id="daysPresent" name="daysPresent" required />
-        </div>
-        <div>
-            <label htmlFor="daysAbsent"> Days Missed: </label>
-            <input type="number" id="daysAbsent" name="daysAbsent" required />
-        </div>
-        <div>
-            <label htmlFor="instituteName"> InstituteName: </label>
-            <input type="text" id="instituteName" name="instituteName" />
-        </div>
-          <button type="submit">Submit</button>
-        </form>
+    <div>
+    <form id="subjectForm" class="my-form">
+      <h2>Subject Details</h2>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required class="form-control" />
       </div>
+      <div class="form-group">
+        <label for="semester">Semester:</label>
+        <input type="text" id="semester" name="semester" required class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="daysPresent">Days Attended:</label>
+        <input type="number" id="daysPresent" name="daysPresent" required class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="daysAbsent">Days Missed:</label>
+        <input type="number" id="daysAbsent" name="daysAbsent" required class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="instituteName">Institute Name:</label>
+        <input type="text" id="instituteName" name="instituteName" class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  
+  <style>
+    .my-form {
+      width: 300px;
+      margin: 0 auto;
+    }
+  
+    .form-group {
+      margin-bottom: 1rem;
+    }
+  
+    .form-control {
+      width: 100%;
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+    }
+  
+    .btn-primary {
+      background-color: #007bff;
+      color: white;
+      border: 1px solid #007bff;
+    }
+  </style>
     `;
 
     const addSubDiv = document.getElementById("addSubDiv");
@@ -178,6 +202,10 @@ const NumberList = ({ username }) => {
 
     const form = document.getElementById("subjectForm");
     form.addEventListener("submit", handleSubmit);
+  };
+
+  const navigateTo = (url) => {
+    window.location.href = url;
   };
 
   const handleSubmit = (event) => {
@@ -202,18 +230,19 @@ const NumberList = ({ username }) => {
         daysMissed: daysAbsent.value,
       }),
     });
-    event.target.reset();
+    // event.target.reset();
+    window.location.reload();
   };
 
   const sendDataToBackend = () => {};
 
   return (
     <div>
-      <h2>Semesters for {username}:</h2>
+      <h2>Semesters for <b>{username}</b>:</h2>
       <ul>
         {numbers.map((number, index) => (
           <li key={index}>
-            <Link to={`/v1/${username}/semester/${number}`}>{number}</Link>
+            <Link to={`/v1/${username}/semester/${number}`}>SEMESTER {number}</Link>
           </li>
         ))}
       </ul>

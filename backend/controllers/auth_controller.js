@@ -28,7 +28,6 @@ const authController = {
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
         // Sign-up successful
-        res.send("Sign-up successful");
 
         const newUserInfo = new UserInfo({
           username: username,
@@ -48,6 +47,8 @@ const authController = {
             console.error("Error saving UserInfo:", error);
             // Handle error
           });
+
+          res.status(200).json(newUserInfo);
       })
       .catch((error) => {
         // Handle sign-up error
