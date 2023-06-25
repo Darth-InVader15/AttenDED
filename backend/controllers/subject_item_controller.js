@@ -14,7 +14,7 @@ exports.getAllSemester = async (req, res) => {
   }
 };
 
- exports.getSubjects = async (req, res) => {
+exports.getSubjects = async (req, res) => {
   try {
     const userInfo = await UserInfo.findOne({ username: req.params.username });
     if (!userInfo) {
@@ -31,7 +31,7 @@ exports.getAllSemester = async (req, res) => {
   }
 };
 
- exports.getSubject = async (req, res) => {
+exports.getSubject = async (req, res) => {
   try {
     const userInfo = await UserInfo.findOne({ username: req.params.username });
     if (!userInfo) {
@@ -54,7 +54,7 @@ exports.getAllSemester = async (req, res) => {
   }
 };
 
- exports.addSubject = async (req, res) => {
+exports.addSubject = async (req, res) => {
   try {
     const userInfo = await UserInfo.findOne({ username: req.params.username });
     if (!userInfo) {
@@ -88,5 +88,91 @@ exports.getAllSemester = async (req, res) => {
     res.status(201).json({ message: "Item added successfully", subject });
   } catch (error) {
     res.status(500).json({ error: "An error occurred" });
+  }
+};
+
+// Controller for incrementing the days absent
+exports.incrementDaysAbsent = async (req, res) => {
+  const { username, semesterNumber, subjectName } = req.params;
+  try {
+    const subject = await SubjectItem.findOneAndUpdate(
+      { username, semester: semesterNumber, name: subjectName },
+      { $inc: { daysMissed: 1 } },
+      { new: true }
+    );
+    if (!subject) {
+      return res.status(404).json({ error: "Subject not found" });
+    }
+    res.json(subject);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+// Controller for incrementing the days present
+exports.incrementDaysPresent = async (req, res) => {
+  const { username, semesterNumber, subjectName } = req.params;
+  try {
+    const subject = await SubjectItem.findOneAndUpdate(
+      { username, semester: semesterNumber, name: subjectName },
+      { $inc: { daysAttended: 1 } },
+      { new: true }
+    );
+    if (!subject) {
+      return res.status(404).json({ error: "Subject not found" });
+    }
+    res.json(subject);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+// Controller for decrementing the days absent
+exports.decrementDaysAbsent = async (req, res) => {
+  const { username, semesterNumber, subjectName } = req.params;
+  try {
+    const subject = await SubjectItem.findOneAndUpdate(
+      {
+        username,
+        semester: semesterNumber,
+        name: subjectName,
+        daysMissed: { $gt: 0 },
+      },
+      { $inc: { daysMissed: -1 } },
+      { new: true }
+    );
+    if (!subject) {
+      return res
+        .status(404)
+        .json({ error: "Subject not found or days absent is already 0" });
+    }
+    res.json(subject);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+// Controller for decrementing the days present
+exports.decrementDaysPresent = async (req, res) => {
+  const { username, semesterNumber, subjectName } = req.params;
+  try {
+    const subject = await SubjectItem.findOneAndUpdate(
+      {
+        username,
+        semester: semesterNumber,
+        name: subjectName,
+        daysAttended: { $gt: 0 },
+      },
+      { $inc: { daysAttended: -1 } },
+      { new: true }
+    );
+    if (!subject) {
+      return res
+        .status(404)
+        .json({ error: "Subject not found or days present is already 0" });
+    }
+    res.json(subject);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
   }
 };
