@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+require('dotenv').config();
 
 // start an instance of express
 const app = express();
@@ -10,6 +11,7 @@ app.use(bodyParser.json());
 
 
 // TODO define routes here
+
 
 
 // Let's start the server
